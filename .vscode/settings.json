@@ -45,5 +45,6 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/System/Volumes/Data/Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include"
 }
