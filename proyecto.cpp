@@ -403,13 +403,10 @@ transaccion agregar(){
 
     transaccion tran1(numeroTransaccion1, monto1, tipoTransaccion1, dia1, mes1, anio1);
     
+    cout<<"Agregando transacciones..."<<endl; 
     tran1.mostrarTransaccion();
-    return tran1;
-
-
-    cout<<"Agregando transacciones "<<endl; 
-    
- }
+    return tran1;    
+}
 
  void detalleCliente(){
     cout<<"Detalle de cliente "<<endl; 
@@ -427,6 +424,15 @@ void mostrarInformes(){
     cout<<"Informes de extracciones y depositos "<<endl;
 }
 
+void menu(){
+    cout << "1. Registrar transacciones"<<endl; 
+    cout << "2. Detalle de cliente por numero de cliente" << endl;
+    cout << "3. Listado de todos los clientes del banco" << endl;
+    cout << "4. Listado de transacciones por cliente" << endl;
+    cout << "5. Informes de extracciones y depositos" << endl;
+    cout << "6. Salir" << endl;
+}
+
 int main(){
     tarjeta t1(123456);
     cliente c1(12345678, "Juan Perez", "Plata", 2020, "Activo", t1);
@@ -435,39 +441,31 @@ int main(){
 
     int opcion; 
     do{
-        cout << "1. Registrar transacciones"<<endl; 
-        cout << "2. Detalle de cliente por numero de cliente" << endl;
-        cout << "3. Listado de todos los clientes del banco" << endl;
-        cout << "4. Listado de transacciones por cliente" << endl;
-        cout << "5. Informes de extracciones y depositos" << endl;
-        cout << "6. Salir" << endl;
-        cout << "Ingrese una opcion: ";
-        cin>>opcion;
-        
-        switch (opcion){
-            case 1:  
-            b1.agregarTransaccion(tran1.agregar());
-            break; 
-            case 2: 
-            detalleCliente(); 
-            break; 
-            case 3: 
-            listarCliente(); 
-            break; 
+        menu();
+        cin >> opcion;
+        switch(opcion){
+            case 1:
+                agregar();
+                break;
+            case 2:
+                detalleCliente();
+                break;
+            case 3:
+                listarCliente();
+                break;
             case 4:
-            listarTrans(); 
-            break; 
-            case 5: 
-            mostrarInformes();
-            break; 
-            case 6: 
-            cout<<"Saliendo del programa "<<endl; 
-            break; 
-            default: 
-            cout<<"Opcion no valida. Intente de nuevo "<<endl;
-        } 
-        cout<<endl; 
-    } while (opcion !=4);
+                listarTrans();
+                break;
+            case 5:
+                mostrarInformes();
+                break;
+            case 6:
+                cout << "Saliendo del programa" << endl;
+                break;
+            default:
+                cout << "Opcion no valida" << endl;
+                break;
+        }
+    }while(opcion != 6);
+
 }
-
-
