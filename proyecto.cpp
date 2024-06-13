@@ -38,112 +38,63 @@ El programa debe permitir realizar las siguientes operaciones:
 */
 
 #include <iostream>
+#include "cliente.h"
 using namespace std;
 
+persona::persona(){
+}
 
+persona::persona(string _nombre, string _apellido, int _DNI){
+    nombre = _nombre;
+    apellido = _apellido;
+    DNI = _DNI;    
+}
 
-class tarjeta{
-    private:
-        int numeroTarjeta;
-    public:
-        tarjeta();
-        tarjeta(int);
-        void setNumeroTarjeta(int);
-        int getNumeroTarjeta();
-        void mostrarTarjeta();
-};
+void persona::setDNI(int _DNI){
+    DNI = _DNI;
+}   
 
-class cliente{
-    private:
-        int dni;
-        string nombre;
-        string tipoCliente;
-        int anioIngreso;
-        string estado;
-        tarjeta t1;
-    public:
-        cliente();
-        cliente(int, string, string, int, string, tarjeta);
-        void setDni(int);
-        void setNombre(string);
-        void setTipoCliente(string);
-        void setAnioIngreso(int);
-        void setEstado(string);
-        int getDni();
-        string getNombre();
-        string getTipoCliente();
-        int getAnioIngreso();
-        string getEstado();
-        void mostrarCliente();
-};
+void persona::setNombre(string _nombre){
+    nombre = _nombre;
+}
 
-class transaccion{
-    private:
-    int numeroTransaccion;
-    int monto;
-    string tipoTransaccion;
-    int dia;
-    int mes;
-    int anio;
+void persona::setApellido(string _apellido){
+    apellido = _apellido;
+}
 
-    public:
-    transaccion();
-    transaccion(int, int, string, int, int, int);
-    void setNumeroTransaccion(int);
-    void setMonto(int);
-    void setTipoTransaccion(string);
-    void setDia(int);
-    void setMes(int);
-    void setAnio(int);
+int persona::getDNI(){
+    return DNI;
+}
 
-    int getNumeroTransaccion();
-    int getMonto();
-    string getTipoTransaccion();
-    int getDia();
-    int getMes();
-    int getAnio();
-    
-    void mostrarTransaccion();
-};
+string persona::getNombre(){
+    return nombre;
+}
 
-class banco{
-    private:
-        int numeroClientes;
-        int numeroTransacciones;
-        cliente clientes[100];
-        transaccion transacciones[100];
-    public:
-        banco();
-        banco(int, int);
-        void agregarCliente(cliente);
-        void agregarTransaccion(transaccion);
+string persona::getApellido(){
+    return apellido;
+}
 
-        void setNumeroClientes(int);
-        int getNumeroClientes(); 
-        void setNumeroTransacciones(int);
-        int getNumeroTransacciones();
-        void setClientes(cliente _cliente[100]);
-        cliente* getClientes();
-        void setTransacciones(transaccion _transaccion[100]);
-        transaccion* getTransacciones();
-
-        void darAlta(int);
-        void darBaja(int);
-        void listarClientes();
-        void listarTransacciones();
-        void mostrarInformes();
-};
+void persona::mostrarPersona(){
+    cout << "Nombre: " << nombre << endl;
+    cout << "Apellido: " << apellido << endl;
+    cout << "DNI: " << DNI << endl;
+}
 
 transaccion::transaccion(){
 }
 
-transaccion::transaccion(int _numeroTransaccion, int _monto, string _tipoTransaccion, int _dia, int _mes, int _anio){
+transaccion::transaccion(int _numeroCliente,int _numeroTransaccion, int _monto, string _tipoTransaccion, int _dia, int _mes, int _anio){
+    numeroCliente= _numeroCliente;
     numeroTransaccion = _numeroTransaccion;
     monto = _monto;
     tipoTransaccion = _tipoTransaccion;
     dia = _dia;
     mes = _mes;
     anio = _anio;
+}
+
+void transaccion::setNumeroCliente(int _numeroCliente){
+    numeroCliente = _numeroCliente;
 }
 
 void transaccion::setNumeroTransaccion(int _numeroTransaccion){
@@ -168,6 +119,10 @@ void transaccion::setMes(int _mes){
 
 void transaccion::setAnio(int _anio){
     anio = _anio;
+}
+
+int transaccion::getNumeroCliente(){
+    return numeroCliente;
 }
 
 int transaccion::getNumeroTransaccion(){
@@ -196,6 +151,7 @@ int transaccion::getAnio(){
 
 
 void transaccion::mostrarTransaccion(){
+    cout << "Cliente: " << numeroCliente << endl;
     cout << "Numero de transaccion: " << numeroTransaccion << endl;
     cout << "Monto: " << monto << endl;
     cout << "Tipo de transaccion: " << tipoTransaccion << endl;
@@ -222,24 +178,36 @@ void tarjeta::mostrarTarjeta(){
     cout << "Numero de tarjeta: " << numeroTarjeta << endl;
 }
 
+personal::personal(){
+}
+
+personal::personal(string _nombre, string _apellido, int _DNI, string _cargo):persona(_nombre,_apellido,_DNI){
+    cargo = _cargo;
+}
+
+void personal::setCargo(string _cargo){
+    cargo = _cargo;
+}
+
+string personal::getCargo(){
+    return cargo;
+}
+
+void personal::mostrarPersonal(){
+    cout << "Nombre: " << getNombre() << endl;
+    cout << "DNI: " << getDNI() << endl;
+    cout << "Cargo: " << cargo << endl;
+}
+
 cliente::cliente(){
 }
 
-cliente::cliente(int _dni, string _nombre, string _tipoCliente, int _anioIngreso, string _estado, tarjeta _t1){
-    dni = _dni;
-    nombre = _nombre;
+cliente::cliente(string _tipoCliente, int _anioIngreso, string _estado, int _numeroCliente, tarjeta _t1,string _nombre, string _apellido, int _DNI):persona(_nombre,_apellido,_DNI){
     tipoCliente = _tipoCliente;
     anioIngreso = _anioIngreso;
     estado = _estado;
+    numeroCliente=_numeroCliente;
     t1 = _t1;
-}
-
-void cliente::setDni(int _dni){
-    dni = _dni;
-}
-
-void cliente::setNombre(string _nombre){
-    nombre = _nombre;
 }
 
 void cliente::setTipoCliente(string _tipoCliente){
@@ -254,13 +222,10 @@ void cliente::setEstado(string _estado){
     estado = _estado;
 }
 
-int cliente::getDni(){
-    return dni;
+void cliente::setNumeroCliente(int _numeroCliente){
+    numeroCliente = _numeroCliente;
 }
 
-string cliente::getNombre(){
-    return nombre;
-}
 
 string cliente::getTipoCliente(){
     return tipoCliente;
@@ -274,9 +239,13 @@ string cliente::getEstado(){
     return estado;
 }
 
+int cliente::getNumeroCliente(){
+    return numeroCliente;
+}
+
 void cliente::mostrarCliente(){
-    cout << "DNI: " << dni << endl;
-    cout << "Nombre: " << nombre << endl;
+    mostrarPersona();
+    cout << "Numero de cliente: " << numeroCliente << endl;
     cout << "Tipo de cliente: " << tipoCliente << endl;
     cout << "Anio de ingreso: " << anioIngreso << endl;
     cout << "Estado: " << estado << endl;
@@ -292,12 +261,12 @@ banco::banco(int _numeroClientes, int _numeroTransacciones){
 }
 
 void banco::agregarCliente(cliente _cliente){
-    clientes[numeroClientes-1] = _cliente;
+    clientes[numeroClientes] = _cliente;
     numeroClientes++;
 }
 
 void banco::agregarTransaccion(transaccion _transaccion){
-    transacciones[numeroTransacciones-1] = _transaccion;
+    transacciones[numeroTransacciones] = _transaccion;
     numeroTransacciones++;
 }
 
@@ -340,7 +309,7 @@ transaccion* banco::getTransacciones(){
 
 void banco::darAlta(int dni){
     for(int i = 0; i < numeroClientes; i++){
-        if(clientes[i].getDni() == dni){
+        if(clientes[i].getDNI() == dni){
             clientes[i].setEstado("Activo");
         }
     } //poner cuando ya esta en alta excpecion
@@ -348,7 +317,7 @@ void banco::darAlta(int dni){
 
 void banco::darBaja(int dni){
     for(int i = 0; i < numeroClientes; i++){
-        if(clientes[i].getDni() == dni){
+        if(clientes[i].getDNI() == dni){
             clientes[i].setEstado("Baja");
         }
     } //poner cuando ya esta de baja excpecion
@@ -377,95 +346,4 @@ void banco::mostrarInformes(){
             transacciones[i].mostrarTransaccion();
         }
     }
-}
-
-transaccion agregar(){
-    int numeroTransaccion1, monto1, dia1, mes1, anio1;
-    string tipoTransaccion1;
-
-    cout<<"Ingrese el numero de transaccion: "<<endl;
-    cin>>numeroTransaccion1;
-
-    cout<<"Ingrese el tipo de transaccion (Deposito o Extraccion): "<<endl;
-    cin>>tipoTransaccion1;
-    
-    cout<<"Ingrese el monto: "<<endl;
-    cin>>monto1;
-
-    cout<<"Ingrese el dia: "<<endl;
-    cin>>dia1;
-
-    cout<<"Ingrese el mes: "<<endl;
-    cin>>mes1;
-
-    cout<<"Ingrese el anio: "<<endl;
-    cin>>anio1;
-
-    transaccion tran1(numeroTransaccion1, monto1, tipoTransaccion1, dia1, mes1, anio1);
-    
-    cout<<"Agregando transacciones..."<<endl; 
-    tran1.mostrarTransaccion();
-    return tran1;    
-}
-
- void detalleCliente(){
-    cout<<"Detalle de cliente "<<endl; 
- }
-
-void listarCliente(){
-    cout<<"Listado de clientes "<<endl; 
-}
-
-void listarTrans(){
-    cout<<"Listado de transacciones por cliente "<<endl; 
-}
-
-void mostrarInformes(){
-    cout<<"Informes de extracciones y depositos "<<endl;
-}
-
-void menu(){
-    cout << "1. Registrar transacciones"<<endl; 
-    cout << "2. Detalle de cliente por numero de cliente" << endl;
-    cout << "3. Listado de todos los clientes del banco" << endl;
-    cout << "4. Listado de transacciones por cliente" << endl;
-    cout << "5. Informes de extracciones y depositos" << endl;
-    cout << "6. Salir" << endl;
-}
-
-int main(){
-    tarjeta t1(123456);
-    cliente c1(12345678, "Juan Perez", "Plata", 2020, "Activo", t1);
-    banco b1;
-    c1.mostrarCliente();
-
-    int opcion; 
-    do{
-        menu();
-        cin >> opcion;
-        switch(opcion){
-            case 1:
-                agregar();
-                break;
-            case 2:
-                detalleCliente();
-                break;
-            case 3:
-                listarCliente();
-                break;
-            case 4:
-                listarTrans();
-                break;
-            case 5:
-                mostrarInformes();
-                break;
-            case 6:
-                cout << "Saliendo del programa" << endl;
-                break;
-            default:
-                cout << "Opcion no valida" << endl;
-                break;
-        }
-    }while(opcion != 6);
-
 }
