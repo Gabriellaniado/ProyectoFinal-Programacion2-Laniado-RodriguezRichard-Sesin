@@ -106,7 +106,6 @@ void listarTrans(banco b1)
             cout << "--------------------"<<endl;
         }
 
-
     }
 
 }
@@ -141,6 +140,13 @@ void cargar(banco &b1){
         tarjeta t2(numeroTarjeta1);
         cliente c1(tipoCliente1, anioIngreso1, estado1, numeroCliente1, t2, nombre1, apellido1, dni1);
         b1.agregarCliente(c1);
+        if (tipoCliente1 =="Oro"){
+                t2.setLimite(250000);
+        } else if (tipoCliente1=="Platino"){
+                t2.setLimite(500000);
+        } else {
+                t2.setLimite(0);
+        }
     }
 
     while(archivoTransacciones >> numeroCliente2 >> numeroTransaccion1 >> monto1 >> tipoTransaccion1 >> dia1 >> mes1 >> anio1){

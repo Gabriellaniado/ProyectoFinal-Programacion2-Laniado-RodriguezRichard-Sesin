@@ -163,7 +163,7 @@ tarjeta::tarjeta(){
 }
 
 tarjeta::tarjeta(int _numeroTarjeta){
-    numeroTarjeta = _numeroTarjeta;
+    numeroTarjeta = _numeroTarjeta;    
 }
 
 void tarjeta::setNumeroTarjeta(int _numeroTarjeta){
@@ -176,6 +176,14 @@ int tarjeta::getNumeroTarjeta(){
 
 void tarjeta::mostrarTarjeta(){
     cout << "Numero de tarjeta: " << numeroTarjeta << endl;
+}
+
+void tarjeta::setLimite(int _limite){
+    limite = _limite;
+}
+
+int tarjeta::getLimite(){
+    return limite;
 }
 
 personal::personal(){
@@ -225,7 +233,6 @@ void cliente::setEstado(string _estado){
 void cliente::setNumeroCliente(int _numeroCliente){
     numeroCliente = _numeroCliente;
 }
-
 
 string cliente::getTipoCliente(){
     return tipoCliente;

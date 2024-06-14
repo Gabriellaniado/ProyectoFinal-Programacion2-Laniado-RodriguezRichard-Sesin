@@ -22,12 +22,18 @@ class tarjeta
 {
 private:
     int numeroTarjeta;
+    int limite;
 
 public:
     tarjeta();
     tarjeta(int);
+
     void setNumeroTarjeta(int);
+    void setLimite(int);
+
     int getNumeroTarjeta();
+    int getLimite();
+
     void mostrarTarjeta();
 };
 
@@ -106,6 +112,7 @@ private:
     int numeroTransacciones;
     cliente clientes[100];
     transaccion transacciones[100];
+    int limite;
 
 public:
     banco();
@@ -121,7 +128,9 @@ public:
     cliente *getClientes();
     void setTransacciones(transaccion _transaccion[100]);
     transaccion *getTransacciones();
-
+    void setLimite(int);
+    int getLimite();
+    
     void darAlta(int);
     void darBaja(int);
     void listarClientes();
