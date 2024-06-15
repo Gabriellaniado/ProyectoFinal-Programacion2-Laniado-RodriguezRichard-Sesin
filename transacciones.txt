@@ -1,2 +1,1 @@
-23 12 1000 deposito 1 2 2013
-23 4 2000 extraccion 4 5 2021
+23 32 df 32 fwee 23 2 2

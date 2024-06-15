@@ -57,18 +57,26 @@ private:
     string estado;
     int numeroCliente;
     tarjeta t1;
-
+    float cajaPesos;
+    float cajaDolares;
 public:
     cliente();
-    cliente(string, int, string, int, tarjeta, string, string, int);
+    cliente(string, int, string, int, tarjeta,float,float, string, string, int);
+
     void setTipoCliente(string);
     void setAnioIngreso(int);
     void setEstado(string);
     void setNumeroCliente(int);
+    void setCajaPesos(float);
+    void setCajaDolares(float);
+    
     string getTipoCliente();
     int getAnioIngreso();
     int getNumeroCliente();
     string getEstado();
+    float getCajaPesos();
+    float getCajaDolares();
+
     void mostrarCliente();
 };
 
@@ -82,10 +90,11 @@ private:
     int dia;
     int mes;
     int anio;
+    string cajaAhorro; 
 
 public:
     transaccion();
-    transaccion(int,int, int, string, int, int, int);
+    transaccion(int,int, int, string, int, int, int, string);
     void setNumeroCliente(int);
     void setNumeroTransaccion(int);
     void setMonto(int);
@@ -93,6 +102,7 @@ public:
     void setDia(int);
     void setMes(int);
     void setAnio(int);
+    void setCajaAhorro(string);
 
     int getNumeroCliente();
     int getNumeroTransaccion();
@@ -101,6 +111,7 @@ public:
     int getDia();
     int getMes();
     int getAnio();
+    string getCajaAhorro();
 
     void mostrarTransaccion();
 };
@@ -135,5 +146,4 @@ public:
     void darBaja(int);
     void listarClientes();
     void listarTransacciones();
-    void mostrarInformes();
 };

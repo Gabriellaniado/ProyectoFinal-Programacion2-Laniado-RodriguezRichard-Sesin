@@ -1,2 +1,6 @@
-Gabriel Perez 23232 plata 2021 activo 23 234423
-raul baul 465855 oro 2024 baja 11 6654656
+Gabriel Perez 23232 plata 2021 activo 23 234423 1000 0
+raul baul 465855 oro 2024 baja 11 6654656 10000 400
+lucas rodriguez 232323 plata 2024 baja 12 123123213 50 25
+pedro gomez 4656555 platino 2018 activo 2323 56653 10000 0
+
+fdv vdvfd 322 fdv 2323 fds 23 32233 3 23
