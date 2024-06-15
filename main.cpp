@@ -177,11 +177,6 @@ void anadirCliente(banco &b1, fstream &archivoClientes)
     cliente c1(tipoCliente1, anioIngreso1, estado1, numeroCliente1, t2, cajaPesos1, cajaDolares1, nombre1, apellido1, dni1);
     b1.agregarCliente(c1);
 
-    archivoClientes.clear();
-    archivoClientes.seekp(0, ios::end);
-    archivoClientes << endl;
-    archivoClientes << nombre1 << " " << apellido1 << " " << dni1 << " " << tipoCliente1 << " " << anioIngreso1 << " " << estado1 << " " << numeroCliente1 << " " << numeroTarjeta1 << " " << cajaPesos1 << " " << cajaDolares1 << endl;
-
     cout << "Cliente agregado exitosamente" << endl;
 }
 
@@ -295,7 +290,8 @@ transaccion agregar(banco &b1, fstream &archivoTransacciones)
     archivoTransacciones.clear();
     archivoTransacciones.seekp(0, ios::end);
 
-    archivoTransacciones << "\n"<< numeroCliente1 << " " << numeroTransaccion1 << " " << cajaAhorro1 << " " << monto1 << " " << tipoTransaccion1 << " " << dia1 << " " << mes1 << " " << anio1 << endl;
+    archivoTransacciones << "\n"
+                         << numeroCliente1 << " " << numeroTransaccion1 << " " << cajaAhorro1 << " " << monto1 << " " << tipoTransaccion1 << " " << dia1 << " " << mes1 << " " << anio1 << endl;
 
     b1.agregarTransaccion(tran1);
     cout << "Agregando transacciones..." << endl;
@@ -465,7 +461,7 @@ void cargar(banco &b1, fstream &archivoClientes, fstream &archivoTransacciones)
     float cajaPesos1, cajaDolares1;
     int numeroCliente2, numeroTransaccion1, monto1, dia1, mes1, anio1;
 
-    while (archivoClientes >> nombre1 >> apellido1 >> dni1 >> tipoCliente1 >> anioIngreso1 >> estado1 >> numeroCliente1 >> numeroTarjeta1 >> cajaPesos1 >> cajaDolares1)
+    while (!archivoClientes.eof() && archivoClientes >> nombre1 >> apellido1 >> dni1 >> tipoCliente1 >> anioIngreso1 >> estado1 >> numeroCliente1 >> numeroTarjeta1 >> cajaPesos1 >> cajaDolares1)
     {
         tarjeta t2(numeroTarjeta1);
         cliente c1(tipoCliente1, anioIngreso1, estado1, numeroCliente1, t2, cajaPesos1, cajaDolares1, nombre1, apellido1, dni1);
@@ -483,7 +479,7 @@ void cargar(banco &b1, fstream &archivoClientes, fstream &archivoTransacciones)
             t2.setLimite(0);
         }
     }
-    while (archivoTransacciones >> numeroCliente2 >> numeroTransaccion1 >> cajaAhorro1 >> monto1 >> tipoTransaccion1 >> dia1 >> mes1 >> anio1)
+    while (!archivoClientes.eof() && archivoTransacciones >> numeroCliente2 >> numeroTransaccion1 >> cajaAhorro1 >> monto1 >> tipoTransaccion1 >> dia1 >> mes1 >> anio1)
     {
         transaccion tran1(numeroCliente2, numeroTransaccion1, monto1, tipoTransaccion1, dia1, mes1, anio1, cajaAhorro1);
         b1.agregarTransaccion(tran1);
@@ -534,7 +530,14 @@ int main()
         }
     } while (opcion != 8);
 
-    archivoClientes.close();
+    ofstream archivoNuevoClientes("clientes.txt");
+
+    for (int i = 0; i < b1.getNumeroClientes(); i++)
+    {
+        archivoNuevoClientes << b1.getClientes()[i].getNombre() << " " << b1.getClientes()[i].getApellido() << " " << b1.getClientes()[i].getDNI() << " " << b1.getClientes()[i].getTipoCliente() << " " << b1.getClientes()[i].getAnioIngreso() << " " << b1.getClientes()[i].getEstado() << " " << b1.getClientes()[i].getNumeroCliente() << " " << b1.getClientes()[i].getTarjeta().getNumeroTarjeta() << " " << b1.getClientes()[i].getNumeroCliente() << " " << b1.getClientes()[i].getCajaPesos() << " " << b1.getClientes()[i].getCajaDolares() << endl;
+    }
+
+    archivoNuevoClientes.close();
     archivoTransacciones.close();
     return 0;
 }

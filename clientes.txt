@@ -1,4 +1,4 @@
-Pedro Gomez 233232 activo 2332 sdadas 20 21213 0 30 232
-roberto dilorenzo 45550303 Oro 2013 Baja 12 32313123 250000 400 550
-
-Lorena Bergaminj 56343 Oro 2013 baja 1212 243423 23 3212
+Gabriel Perez 23232 plata 2021 activo 23 234423 23 1000 0
+raul baul 465855 oro 2024 baja 11 6654656 11 10000 400
+lucas rodriguez 232323 plata 2024 baja 12 123123213 12 50 0
+pedro gomez 4656555 platino 2018 activo 2323 56653 2323 10000 0
