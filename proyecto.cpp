@@ -83,7 +83,7 @@ void persona::mostrarPersona(){
 transaccion::transaccion(){
 }
 
-transaccion::transaccion(int _numeroCliente,int _numeroTransaccion, int _monto, string _tipoTransaccion, int _dia, int _mes, int _anio, string _cajaAhorro){
+transaccion::transaccion(int _numeroCliente,int _numeroTransaccion, float _monto, string _tipoTransaccion, int _dia, int _mes, int _anio, string _cajaAhorro){
     numeroCliente= _numeroCliente;
     numeroTransaccion = _numeroTransaccion;
     monto = _monto;
@@ -102,7 +102,7 @@ void transaccion::setNumeroTransaccion(int _numeroTransaccion){
     numeroTransaccion = _numeroTransaccion;
 }
 
-void transaccion::setMonto(int _monto){
+void transaccion::setMonto(float _monto){
     monto = _monto;
 }
 
@@ -134,7 +134,7 @@ int transaccion::getNumeroTransaccion(){
     return numeroTransaccion;
 }
 
-int transaccion::getMonto(){
+float transaccion::getMonto(){
     return monto;
 }
 
@@ -275,6 +275,10 @@ string cliente::getEstado(){
 
 int cliente::getNumeroCliente(){
     return numeroCliente;
+}
+
+tarjeta cliente::getTarjeta(){
+    return t1;
 }
 
 void cliente::mostrarCliente(){

@@ -76,6 +76,7 @@ public:
     string getEstado();
     float getCajaPesos();
     float getCajaDolares();
+    tarjeta getTarjeta();
 
     void mostrarCliente();
 };
@@ -85,7 +86,7 @@ class transaccion
 private:
     int numeroCliente;
     int numeroTransaccion;
-    int monto;
+    float monto;
     string tipoTransaccion;
     int dia;
     int mes;
@@ -94,10 +95,10 @@ private:
 
 public:
     transaccion();
-    transaccion(int,int, int, string, int, int, int, string);
+    transaccion(int,int, float, string, int, int, int, string);
     void setNumeroCliente(int);
     void setNumeroTransaccion(int);
-    void setMonto(int);
+    void setMonto(float);
     void setTipoTransaccion(string);
     void setDia(int);
     void setMes(int);
@@ -106,7 +107,7 @@ public:
 
     int getNumeroCliente();
     int getNumeroTransaccion();
-    int getMonto();
+    float getMonto();
     string getTipoTransaccion();
     int getDia();
     int getMes();
