@@ -1,8 +1,3 @@
-
-20 2334223 Pesos 15 Extraccion 1 2 2024
-
-2 4864853 Pesos 450 Extraccion 1 4 2013
-
-2131 6435 Dolares 1 Deposito 1 12 1978
-
-12 465544 Dolares 25 Extraccion 2 3 2014
+1 12312 dolares 400 extraccion 1 12 2015
+ 
+1 21334 pesos 500 deposito 1 12 2018

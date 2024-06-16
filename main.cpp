@@ -51,7 +51,7 @@ void leerEntero(int &resultado)
 
             if (resultado < 0)
             {
-                throw out_of_range("Número debe ser un entero natural (mayor o igual a cero).");
+                throw out_of_range("Numero debe ser un entero natural (mayor o igual a cero).");
             }
             break;
         }
@@ -127,33 +127,66 @@ void leerPalabras(string &resultado)
         }
         else
         {
-            cout << "Error: Entrada incorrecta. \nPor favor, inténtelo de nuevo:" << endl;
+            cout << "Error: Entrada incorrecta. \nPor favor, intentelo de nuevo:" << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
 }
 
-void anadirCliente(banco &b1, fstream &archivoClientes)
+void anadirCliente(banco &b1)
 {
     int dni1, anioIngreso1, numeroCliente1, numeroTarjeta1;
     string nombre1, apellido1, tipoCliente1, estado1;
     float cajaPesos1, cajaDolares1;
 
-    cout << "Ingresar nombre de cliente" << endl;
+    cout << "Ingresar nombre de cliente:" << endl;
     leerPalabras(nombre1);
-    cout << "Ingresar apellido de cliente" << endl;
+    cout << "Ingresar apellido de cliente:" << endl;
     leerPalabras(apellido1);
-    cout << "Ingrese numero de cliente" << endl;
+    cout << "Ingrese numero de cliente:" << endl;
     leerEntero(numeroCliente1);
-    cout << "Ingresar tipo de cliente" << endl;
-    leerPalabras(tipoCliente1);
-    cout << "Ingresar DNI de cliente" << endl;
-    leerEntero(dni1);
-    cout << "Ingresar anio de ingreso" << endl;
-    leerEntero(anioIngreso1);
-    cout << "Ingresar estado del cliente" << endl;
-    leerPalabras(estado1);
+
+    do
+    {
+        cout << "Ingresar tipo de cliente (Plata, Oro o Platino):" << endl;
+        leerPalabras(tipoCliente1);
+        if (tipoCliente1 != "Plata" && tipoCliente1 != "Oro" && tipoCliente1 != "Platino" && tipoCliente1 != "plata" && tipoCliente1 != "oro" && tipoCliente1 != "platino")
+        {
+            cout << "Tipo de cliente no valido. Por favor, ingrese un tipo de cliente valido" << endl;
+        }
+    } while (tipoCliente1 != "Plata" && tipoCliente1 != "Oro" && tipoCliente1 != "Platino" && tipoCliente1 != "plata" && tipoCliente1 != "oro" && tipoCliente1 != "platino");
+
+    do
+    {
+        cout << "Ingresar DNI de cliente:" << endl;
+        leerEntero(dni1);
+        if (dni1 < 1000000 || dni1 > 99999999)
+        {
+            cout << "DNI no valido. Por favor, ingrese un DNI valido" << endl;
+        }
+    } while (dni1 < 1000000 || dni1 > 99999999);
+
+    do
+    {
+        cout << "Ingresar anio de ingreso:" << endl;
+        leerEntero(anioIngreso1);
+        if (anioIngreso1 < 1900 || anioIngreso1 > 2024)
+        {
+            cout << "Anio no valido. Por favor, ingrese un anio valido" << endl;
+        }
+    } while (anioIngreso1 < 1900 || anioIngreso1 > 2024);
+
+    do
+    {
+        cout << "Ingresar estado del cliente (Activo, Baja):" << endl;
+        leerPalabras(estado1);
+        if (estado1 != "Activo" && estado1 != "Baja" && estado1 != "activo" && estado1 != "baja")
+        {
+            cout << "Estado no valido. Por favor, ingrese un estado valido" << endl;
+        }
+    } while (estado1 != "Activo" && estado1 != "Baja" && estado1 != "activo" && estado1 != "baja");
+
     cout << "Ingrese el numero de tarjeta del cliente" << endl;
     leerEntero(numeroTarjeta1);
     cout << "Ingrese el saldo de la caja de ahorro en pesos:" << endl;
@@ -162,11 +195,11 @@ void anadirCliente(banco &b1, fstream &archivoClientes)
     leerFlotante(cajaDolares1);
 
     tarjeta t2(numeroTarjeta1);
-    if (tipoCliente1 == "Oro")
+    if (tipoCliente1 == "Oro" || tipoCliente1 == "oro")
     {
         t2.setLimite(250000);
     }
-    else if (tipoCliente1 == "Platino")
+    else if (tipoCliente1 == "Platino" || tipoCliente1 == "platino")
     {
         t2.setLimite(500000);
     }
@@ -185,68 +218,103 @@ transaccion agregar(banco &b1, fstream &archivoTransacciones)
     int numeroCliente1, numeroTransaccion1, dia1, mes1, anio1;
     string tipoTransaccion1, cajaAhorro1;
     float monto1;
-
-    cout << "Ingrese el numero de cliente que realiza la transaccion: " << endl;
-    leerEntero(numeroCliente1);
+    int band = 1;
+    do
+    {
+        cout << "Ingrese el numero de cliente que realiza la transaccion: " << endl;
+        leerEntero(numeroCliente1);
+        for (int i = 0; i < b1.getNumeroClientes(); i++)
+        {
+            if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
+            {
+                band = 0;
+            }
+        }
+        if (band == 1)
+        {
+            cout << "Numero de cliente no valido. Por favor, ingrese un numero de cliente valido" << endl;
+        }
+        else if (band == 1 && b1.getNumeroClientes() == 0)
+        {
+            cout << "No hay clientes registrados." << endl;
+            break;
+        }
+    } while (band == 1 && b1.getNumeroClientes() != 0);
 
     cout << "Ingrese el numero de transaccion: " << endl;
     leerEntero(numeroTransaccion1);
 
-    cout << "Ingrese el tipo de transaccion (Deposito o Extraccion): " << endl;
-    leerPalabras(tipoTransaccion1);
+    do
+    {
+        cout << "Ingrese el tipo de transaccion (Deposito o Extraccion): " << endl;
+        leerPalabras(tipoTransaccion1);
+        if (tipoTransaccion1 != "Deposito" && tipoTransaccion1 != "Extraccion" && tipoTransaccion1 != "deposito" && tipoTransaccion1 != "extraccion")
+        {
+            cout << "Tipo de transaccion no valido. Por favor, ingrese un tipo de transaccion valido" << endl;
+        }
+    } while (tipoTransaccion1 != "Deposito" && tipoTransaccion1 != "Extraccion" && tipoTransaccion1 != "deposito" && tipoTransaccion1 != "extraccion");
 
-    cout << "Ingrese el tipo de caja donde desea realizar la operacion: " << endl;
-    leerPalabras(cajaAhorro1);
+    do
+    {
+        cout << "Ingrese el tipo de caja donde desea realizar la operacion (Dolares o Pesos): " << endl;
+        leerPalabras(cajaAhorro1);
+        if (cajaAhorro1 != "Dolares" && cajaAhorro1 != "Pesos" && cajaAhorro1 != "dolares" && cajaAhorro1 != "pesos")
+        {
+            cout << "Tipo de caja de ahorro no valido. Por favor, ingrese un tipo de caja de ahorro valido" << endl;
+        }
+    } while (cajaAhorro1 != "Dolares" && cajaAhorro1 != "Pesos" && cajaAhorro1 != "dolares" && cajaAhorro1 != "pesos");
 
     cout << "Ingrese el monto: " << endl;
     leerFlotante(monto1);
 
-    if (tipoTransaccion1 == "Extraccion")
+    if (tipoTransaccion1 == "Extraccion" || tipoTransaccion1 == "extraccion")
     {
-        if (cajaAhorro1 == "Pesos")
+        if (cajaAhorro1 == "Pesos" || cajaAhorro1 == "pesos")
         {
             for (int i = 0; i < b1.getNumeroClientes(); i++)
             {
                 if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
                 {
-                    if (monto1 > b1.getClientes()[i].getCajaPesos())
+                    do
                     {
-                        cout << "No se puede realizar la extraccion. Saldo insuficiente" << endl;
-                        cout << "Saldo actual: " << b1.getClientes()[i].getCajaPesos() << endl;
-                        cout << "Monto a extraer: " << endl;
-                        leerFlotante(monto1);
-                    }
-                    else
-                    {
-                        b1.getClientes()[i].setCajaPesos(b1.getClientes()[i].getCajaPesos() - monto1);
-                    }
+                        if (monto1 > b1.getClientes()[i].getCajaPesos())
+                        {
+                            cout << "No se puede realizar la extraccion. Saldo insuficiente" << endl;
+                            cout << "Saldo actual: " << b1.getClientes()[i].getCajaPesos() << endl;
+                            cout << "Monto a extraer: " << endl;
+                            leerFlotante(monto1);
+                        }
+                    
+                    } while (monto1 > b1.getClientes()[i].getCajaPesos());
+                    b1.getClientes()[i].setCajaPesos(b1.getClientes()[i].getCajaPesos() - monto1);
                 }
             }
         }
-        else if (cajaAhorro1 == "Dolares")
+        else if (cajaAhorro1 == "Dolares" || cajaAhorro1 == "dolares")
         {
             for (int i = 0; i < b1.getNumeroClientes(); i++)
             {
                 if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
                 {
-                    if (monto1 > b1.getClientes()[i].getCajaDolares())
+                    do
                     {
-                        cout << "No se puede realizar la extraccion. Saldo insuficiente" << endl;
-                        cout << "Saldo actual: " << b1.getClientes()[i].getCajaDolares() << endl;
-                        cout << "Monto a extraer: " << endl;
-                        leerFlotante(monto1);
-                    }
-                    else
-                    {
-                        b1.getClientes()[i].setCajaDolares(b1.getClientes()[i].getCajaDolares() - monto1);
-                    }
+                        if (monto1 > b1.getClientes()[i].getCajaDolares())
+                        {
+                            cout << "No se puede realizar la extraccion. Saldo insuficiente" << endl;
+                            cout << "Saldo actual: " << b1.getClientes()[i].getCajaDolares() << endl;
+                            cout << "Monto a extraer: " << endl;
+                            leerFlotante(monto1);
+                        }
+                
+                    } while (monto1 > b1.getClientes()[i].getCajaDolares());
+                    b1.getClientes()[i].setCajaDolares(b1.getClientes()[i].getCajaDolares() - monto1);
                 }
             }
         }
     }
-    else if (tipoTransaccion1 == "Deposito")
+    else if (tipoTransaccion1 == "Deposito" || tipoTransaccion1 == "deposito")
     {
-        if (cajaAhorro1 == "Pesos")
+        if (cajaAhorro1 == "Pesos" || cajaAhorro1 == "pesos")
         {
             for (int i = 0; i < b1.getNumeroClientes(); i++)
             {
@@ -256,7 +324,7 @@ transaccion agregar(banco &b1, fstream &archivoTransacciones)
                 }
             }
         }
-        else if (cajaAhorro1 == "Dolares")
+        else if (cajaAhorro1 == "Dolares" || cajaAhorro1 == "dolares")
         {
             for (int i = 0; i < b1.getNumeroClientes(); i++)
             {
@@ -287,11 +355,10 @@ transaccion agregar(banco &b1, fstream &archivoTransacciones)
 
     transaccion tran1(numeroCliente1, numeroTransaccion1, monto1, tipoTransaccion1, dia1, mes1, anio1, cajaAhorro1);
 
-    archivoTransacciones.clear();
-    archivoTransacciones.seekp(0, ios::end);
-
-    archivoTransacciones << "\n"
-                         << numeroCliente1 << " " << numeroTransaccion1 << " " << cajaAhorro1 << " " << monto1 << " " << tipoTransaccion1 << " " << dia1 << " " << mes1 << " " << anio1 << endl;
+    archivoTransacciones.clear();            // Limpia el flag de error del archivo
+    archivoTransacciones.seekp(0, ios::end); /*empieza a escribir al final del archivo , en vez de sobreescribir*/
+    archivoTransacciones <<" "<< endl;
+    archivoTransacciones << numeroCliente1 << " " << numeroTransaccion1 << " " << cajaAhorro1 << " " << monto1 << " " << tipoTransaccion1 << " " << dia1 << " " << mes1 << " " << anio1 << endl;
 
     b1.agregarTransaccion(tran1);
     cout << "Agregando transacciones..." << endl;
@@ -301,11 +368,32 @@ transaccion agregar(banco &b1, fstream &archivoTransacciones)
 
 void detalleCliente(banco &b1)
 {
-    int numeroCliente1;
-    cout << "Ingrese numero de cliente" << endl;
-    leerEntero(numeroCliente1);
+    int numeroCliente1, band = 1;
 
-    cout << "Detalle de cliente por numero de cliente" << endl;
+    do
+    {
+        cout << "Ingrese numero de cliente: " << endl;
+        leerEntero(numeroCliente1);
+        for (int i = 0; i < b1.getNumeroClientes(); i++)
+        {
+            if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
+            {
+                band = 0;
+            }
+        }
+        if (band == 1)
+        {
+            cout << "Numero de cliente no valido." << endl;
+        }
+        else if (band == 1 && b1.getNumeroClientes() == 0)
+        {
+            cout << "No hay clientes registrados." << endl;
+            break;
+        }
+    } while (band == 1 && b1.getNumeroClientes() != 0);
+
+    cout << "Detalle de cliente por numero de cliente:" << endl
+         << endl;
 
     for (int i = 0; i < b1.getNumeroClientes(); i++)
     {
@@ -329,31 +417,53 @@ void listarClientes(banco b1)
 
 void listarTrans(banco b1)
 {
-    int numeroCliente1;
-    cout << "Ingrese el numero de cliente para ver sus transacciones:";
-    leerEntero(numeroCliente1);
+    int numeroCliente1, band = 1;
 
-    cout << "Detalle de cliente por numero de cliente" << endl;
-
-    for (int i = 0; i < b1.getNumeroClientes(); i++)
+    do
     {
-        if (b1.getTransacciones()[i].getNumeroCliente() == numeroCliente1)
+        cout << "Ingrese el numero de cliente para ver sus transacciones:";
+        leerEntero(numeroCliente1);
+        for (int i = 0; i < b1.getNumeroClientes(); i++)
         {
-            b1.getTransacciones()[i].mostrarTransaccion();
-            cout << "--------------------" << endl;
+            if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
+            {
+                band = 0;
+                cout << "Detalle de cliente por numero de cliente" << endl;
+
+                for (int i = 0; i < b1.getNumeroClientes(); i++)
+                {
+                    if (b1.getTransacciones()[i].getNumeroCliente() == numeroCliente1)
+                    {
+                        b1.getTransacciones()[i].mostrarTransaccion();
+                        cout << "--------------------" << endl;
+                    }
+                }
+            }
         }
-    }
+        if (band == 1)
+        {
+            cout << "Numero de cliente no valido." << endl;
+        }
+        else if (band == 1 && b1.getNumeroClientes() == 0)
+        {
+            cout << "No hay clientes registrados." << endl;
+            break;
+        }
+
+    } while (band == 1 && b1.getNumeroClientes() != 0);
 }
 
 void mostrarInformes(banco &b1)
 {
-    int criterio, mes, anio;
-    cout << "Seleccione el criterio de informe: " << endl;
-    cout << "1. En un mes particular" << endl;
-    cout << "2. Por anio" << endl;
-    cout << "3. Todas las operaciones " << endl;
+    int criterio, mes, anio, band;
+
     do
     {
+        cout << "Seleccione el criterio de informe: " << endl;
+        cout << "1. En un mes particular" << endl;
+        cout << "2. Por anio" << endl;
+        cout << "3. Todas las operaciones " << endl;
+
         leerEntero(criterio);
         if (criterio > 3 || criterio < 1)
         {
@@ -365,80 +475,144 @@ void mostrarInformes(banco &b1)
     {
     case 1:
         cout << "Informe de transacciones por mes: " << endl;
-        cout << "Ingrese el mes: " << endl;
-        leerEntero(mes);
-        cout << "Ingrese el anio: " << endl;
-        leerEntero(anio);
+        band = 1;
+        do
+        {
+            cout << "Ingrese el mes: " << endl;
+            leerEntero(mes);
+            if (mes < 1 || mes > 12)
+            {
+                cout << "Mes no valido. Por favor, ingrese un mes valido" << endl;
+            }
+        } while (mes < 1 || mes > 12);
+
+        do
+        {
+            cout << "Ingrese el anio: " << endl;
+            leerEntero(anio);
+            if (anio < 1900 || anio > 2024)
+            {
+                cout << "Anio no valido. Por favor, ingrese un anio valido" << endl;
+            }
+        } while (anio < 1900 || anio > 2024);
+
         for (int i = 0; i < b1.getNumeroTransacciones(); i++)
         {
             if (b1.getTransacciones()[i].getMes() == mes && b1.getTransacciones()[i].getAnio() == anio)
             {
                 b1.getTransacciones()[i].mostrarTransaccion();
+                band = 0;
             }
+        }
+        if (band == 1)
+        {
+            cout << "No hay transacciones en el mes y anio seleccionado." << endl;
         }
         break;
     case 2:
         cout << "Informe de transacciones por anio" << endl;
-        cout << "Ingrese el anio: " << endl;
-        leerEntero(anio);
+        band = 1;
+        do
+        {
+            cout << "Ingrese el anio: " << endl;
+            leerEntero(anio);
+            if (anio < 1900 || anio > 2024)
+            {
+                cout << "Anio no valido. Por favor, ingrese un anio valido" << endl;
+            }
+        } while (anio < 1900 || anio > 2024);
+
         for (int i = 0; i < b1.getNumeroTransacciones(); i++)
         {
             if (b1.getTransacciones()[i].getAnio() == anio)
             {
                 b1.getTransacciones()[i].mostrarTransaccion();
+                band = 0;
             }
+        }
+        if (band == 1)
+        {
+            cout << "No hay transacciones en el anio seleccionado." << endl;
         }
         break;
     case 3:
         cout << "Todas las operaciones: " << endl;
         b1.listarTransacciones();
+
+        if (b1.getNumeroTransacciones() == 0)
+        {
+            cout << "No hay transacciones registradas." << endl;
+        }
         break;
     }
 }
 
 void bajaAlta(banco &b1)
 {
-    int numeroCliente1;
-    cout << "Ingrese el numero de cliente que desea dar de baja/alta: " << endl;
-    leerEntero(numeroCliente1);
+    // Check if there are no clients and exit the function if true
+    if (b1.getNumeroClientes() == 0)
+    {
+        cout << "No hay clientes registrados." << endl;
+        return; // Exits the function
+    }
 
-    cout << "Seleccione la opcion que desea realizar: " << endl;
-    cout << "1. Dar de baja" << endl;
-    cout << "2. Dar de alta" << endl;
+    int numeroCliente1, band = 1;
 
-    int opcion;
     do
     {
-        leerEntero(opcion);
-        if (opcion > 2 || opcion < 1)
-        {
-            cout << "Opción no válida. Por favor, seleccione una opción válida." << endl;
-        }
-    } while (opcion > 2 || opcion < 1);
+        cout << "Ingrese el numero de cliente que desea dar de baja/alta: " << endl;
+        leerEntero(numeroCliente1);
 
-    switch (opcion)
-    {
-    case 1:
         for (int i = 0; i < b1.getNumeroClientes(); i++)
         {
             if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
             {
-                b1.getClientes()[i].setEstado("Baja");
+                band = 0;
             }
         }
-        cout << "Dando de baja..." << endl;
-        break;
-    case 2:
-        for (int i = 0; i < b1.getNumeroClientes(); i++)
+        if (band == 1)
         {
-            if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
+            cout << "Numero de cliente no valido." << endl;
+        }
+
+        int opcion;
+        while (opcion > 2 || opcion < 1)
+        {
+            cout << "Seleccione la opcion que desea realizar: " << endl;
+            cout << "1. Dar de baja" << endl;
+            cout << "2. Dar de alta" << endl;
+            leerEntero(opcion);
+            
+            if (opcion > 2 || opcion < 1)
             {
-                b1.getClientes()[i].setEstado("Alta");
+                cout << "Opcion no valida. Por favor, seleccione una opcion valida." << endl;
             }
         }
-        cout << "Dando de alta..." << endl;
-        break;
-    }
+
+        switch (opcion)
+        {
+        case 1:
+            for (int i = 0; i < b1.getNumeroClientes(); i++)
+            {
+                if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
+                {
+                    b1.getClientes()[i].setEstado("Baja");
+                }
+            }
+            cout << "Dando de baja..." << endl;
+            break;
+        case 2:
+            for (int i = 0; i < b1.getNumeroClientes(); i++)
+            {
+                if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
+                {
+                    b1.getClientes()[i].setEstado("Alta");
+                }
+            }
+            cout << "Dando de alta..." << endl;
+            break;
+        }
+    } while (band == 1);
 }
 void menu()
 {
@@ -466,11 +640,11 @@ void cargar(banco &b1, fstream &archivoClientes, fstream &archivoTransacciones)
         tarjeta t2(numeroTarjeta1);
         cliente c1(tipoCliente1, anioIngreso1, estado1, numeroCliente1, t2, cajaPesos1, cajaDolares1, nombre1, apellido1, dni1);
         b1.agregarCliente(c1);
-        if (tipoCliente1 == "Oro")
+        if (tipoCliente1 == "Oro" || tipoCliente1 == "oro")
         {
             t2.setLimite(250000);
         }
-        else if (tipoCliente1 == "Platino")
+        else if (tipoCliente1 == "Platino" || tipoCliente1 == "platino")
         {
             t2.setLimite(500000);
         }
@@ -479,7 +653,7 @@ void cargar(banco &b1, fstream &archivoClientes, fstream &archivoTransacciones)
             t2.setLimite(0);
         }
     }
-    while (!archivoClientes.eof() && archivoTransacciones >> numeroCliente2 >> numeroTransaccion1 >> cajaAhorro1 >> monto1 >> tipoTransaccion1 >> dia1 >> mes1 >> anio1)
+    while (!archivoTransacciones.eof() && archivoTransacciones >> numeroCliente2 >> numeroTransaccion1 >> cajaAhorro1 >> monto1 >> tipoTransaccion1 >> dia1 >> mes1 >> anio1)
     {
         transaccion tran1(numeroCliente2, numeroTransaccion1, monto1, tipoTransaccion1, dia1, mes1, anio1, cajaAhorro1);
         b1.agregarTransaccion(tran1);
@@ -502,7 +676,7 @@ int main()
         switch (opcion)
         {
         case 1:
-            anadirCliente(b1, archivoClientes);
+            anadirCliente(b1);
             break;
         case 2:
             agregar(b1, archivoTransacciones);
@@ -534,7 +708,7 @@ int main()
 
     for (int i = 0; i < b1.getNumeroClientes(); i++)
     {
-        archivoNuevoClientes << b1.getClientes()[i].getNombre() << " " << b1.getClientes()[i].getApellido() << " " << b1.getClientes()[i].getDNI() << " " << b1.getClientes()[i].getTipoCliente() << " " << b1.getClientes()[i].getAnioIngreso() << " " << b1.getClientes()[i].getEstado() << " " << b1.getClientes()[i].getNumeroCliente() << " " << b1.getClientes()[i].getTarjeta().getNumeroTarjeta() << " " << b1.getClientes()[i].getNumeroCliente() << " " << b1.getClientes()[i].getCajaPesos() << " " << b1.getClientes()[i].getCajaDolares() << endl;
+        archivoNuevoClientes << b1.getClientes()[i].getNombre() << " " << b1.getClientes()[i].getApellido() << " " << b1.getClientes()[i].getDNI() << " " << b1.getClientes()[i].getTipoCliente() << " " << b1.getClientes()[i].getAnioIngreso() << " " << b1.getClientes()[i].getEstado()  << " " << b1.getClientes()[i].getTarjeta().getNumeroTarjeta() << " " << b1.getClientes()[i].getNumeroCliente() << " " << b1.getClientes()[i].getCajaPesos() << " " << b1.getClientes()[i].getCajaDolares() << endl;
     }
 
     archivoNuevoClientes.close();
