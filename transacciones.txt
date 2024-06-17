@@ -9,3 +9,5 @@
 3 653534 pesos 123 extraccion 1 12 2018
  
 1 465 pesos 10000 deposito 2 4 2013
+ 
+4 100 dolares 1231 deposito 1 12 2013

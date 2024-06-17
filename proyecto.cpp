@@ -159,6 +159,7 @@ string transaccion::getCajaAhorro(){
 }
 
 void transaccion::mostrarTransaccion(){
+    cout << endl;
     cout << "Cliente: " << numeroCliente << endl;
     cout << "Numero de transaccion: " << numeroTransaccion << endl;
     cout << "Monto: " << monto << endl;
@@ -282,6 +283,7 @@ tarjeta cliente::getTarjeta(){
 }
 
 void cliente::mostrarCliente(){
+    cout << endl;
     mostrarPersona();
     cout << "Numero de cliente: " << numeroCliente << endl;
     cout << "Tipo de cliente: " << tipoCliente << endl;
