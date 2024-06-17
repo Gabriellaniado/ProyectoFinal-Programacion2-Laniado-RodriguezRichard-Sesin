@@ -1,2 +1,4 @@
-manuel diaz 45637483 plata 2014 Baja 1 453435 1500 500
-jose perez 46525689 plata 2018 activo 43435 23 234 100
+rodrigo garro 32423243 oro 2019 Activo 1 156543 10500 1500
+lautaro blanco 32423243 oro 2019 Baja 2 2615 500 1200
+rodrigo porro 32423243 oro 2019 Activo 3 61153 377 1200
+lucas dalto 34908746 platino 2024 activo 4 35645 400 10000

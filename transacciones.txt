@@ -1,3 +1,11 @@
-1 12312 dolares 400 extraccion 1 12 2015
  
-1 21334 pesos 500 deposito 1 12 2018
+1 664 dolares 1000 deposito 1 12 2017
+1 664 dolares 1000 deposito 1 12 2017
+4 664 dolares 1000 deposito 1 12 2017
+ 
+3 56 dolares 300 deposito 2 3 2016
+
+ 
+3 653534 pesos 123 extraccion 1 12 2018
+ 
+1 465 pesos 10000 deposito 2 4 2013
