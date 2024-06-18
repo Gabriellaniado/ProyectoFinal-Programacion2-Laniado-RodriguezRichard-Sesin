@@ -50,7 +50,6 @@ void leerEntero(int &resultado)
         {
             string input;
             cin >> input;
-            resultado = stoi(input);
 
             size_t pos;
             resultado = stoi(input, &pos);
@@ -87,7 +86,6 @@ void leerFlotante(float &resultado)
         {
             string input;
             cin >> input;
-            resultado = stof(input);
 
             size_t pos;
             resultado = stof(input, &pos);
