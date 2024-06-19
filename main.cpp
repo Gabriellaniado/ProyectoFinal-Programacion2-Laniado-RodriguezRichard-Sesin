@@ -54,24 +54,24 @@ void leerEntero(int &resultado)
             size_t pos;
             resultado = stoi(input, &pos);
 
-            if (pos != input.length()) /* para que no pongan nros combinados con caracteres*/
+            if (pos != input.length())
             {
-                throw invalid_argument("Entrada no válida. No es un número entero natural.");
+                throw invalid_argument("Entrada no valida. No es un numero entero natural.");
             }
 
-            if (resultado < 0) /*p que no pongan nros negativos*/
+            if (resultado < 0)
             {
                 throw out_of_range("Numero debe ser un entero natural (mayor o igual a cero).");
             }
             break;
         }
-        catch (invalid_argument &e)
+        catch (invalid_argument)
         {
-            cerr << "Error: Entrada no valida. \nPor favor, ingrese un numero valido" << endl;
+            cout << "Error: Entrada no valida. \nPor favor, ingrese un numero valido" << endl;
         }
-        catch (out_of_range &e)
+        catch (out_of_range)
         {
-            cerr << "Error: Entrada fuera de rango. \nPor favor, ingrese un numero valido" << endl;
+            cout << "Entrada fuera de rango. \nPor favor, ingrese un numero valido" << endl;
         }
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -92,7 +92,7 @@ void leerFlotante(float &resultado)
 
             if (pos != input.length())
             {
-                throw invalid_argument("Entrada no válida. No es un número flotante.");
+                throw invalid_argument("Entrada no valida. No es un numero flotante.");
             }
 
             if (resultado < 0)
@@ -101,11 +101,11 @@ void leerFlotante(float &resultado)
             }
             break;
         }
-        catch (invalid_argument &e)
+        catch (invalid_argument)
         {
             cout << "Error: Entrada no valida. \nPor favor, ingrese un numero valido" << endl;
         }
-        catch (out_of_range &e)
+        catch (out_of_range)
         {
             cout << "Entrada fuera de rango. \nPor favor, ingrese un numero valido" << endl;
         }
@@ -148,7 +148,8 @@ void anadirCliente(banco &b1)
     int dni1, anioIngreso1, numeroCliente1, numeroTarjeta1;
     string nombre1, apellido1, tipoCliente1, estado1;
     float cajaPesos1, cajaDolares1;
-    bool band;
+    bool band = false;
+
     cout << "Ingresar nombre de cliente:" << endl;
     leerPalabras(nombre1);
     cout << "Ingresar apellido de cliente:" << endl;
@@ -156,9 +157,9 @@ void anadirCliente(banco &b1)
 
     do
     {
-        band = false;
         cout << "Ingrese numero de cliente:" << endl;
         leerEntero(numeroCliente1);
+
         for (int i = 0; i < b1.getNumeroClientes(); i++)
         {
             if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
@@ -180,10 +181,9 @@ void anadirCliente(banco &b1)
         }
     } while (tipoCliente1 != "Plata" && tipoCliente1 != "Oro" && tipoCliente1 != "Platino" && tipoCliente1 != "plata" && tipoCliente1 != "oro" && tipoCliente1 != "platino");
 
-    bool bandera1;
+    bool bandera1 = false;
     do
     {
-        bandera1 = false;
         do
         {
             cout << "Ingresar DNI de cliente:" << endl;
@@ -193,6 +193,7 @@ void anadirCliente(banco &b1)
                 cout << "DNI no valido. Por favor, ingrese un DNI valido" << endl;
             }
         } while (dni1 < 1000000 || dni1 > 99999999);
+
         for (int i = 0; i < b1.getNumeroClientes(); i++)
         {
             if (b1.getClientes()[i].getDNI() == dni1)
@@ -201,7 +202,6 @@ void anadirCliente(banco &b1)
                 bandera1 = true;
                 break;
             }
-
         }
     } while (bandera1);
 
@@ -225,12 +225,12 @@ void anadirCliente(banco &b1)
         }
     } while (estado1 != "Activo" && estado1 != "Baja" && estado1 != "activo" && estado1 != "baja");
 
-    bool bandera2;
+    bool bandera2 = false;
     do
     {
-        bandera2 = false; /*asumo que si pasa, asi entra al for. asumo que si y desp cambio a no */
         cout << "Ingresar numero de tarjeta del cliente:" << endl;
         leerEntero(numeroTarjeta1);
+
         for (int i = 0; i < b1.getNumeroClientes(); i++)
         {
             if (b1.getClientes()[i].getTarjeta().getNumeroTarjeta() == numeroTarjeta1)
@@ -434,7 +434,11 @@ void agregar(banco &b1, fstream &archivoTransacciones)
                     cout << " ADVERTENCIA " << endl;
                     cout << "No es una fecha valida! Por favor, vuelva a ingresar una fecha" << endl;
                 }
-            } while (!validar_fecha(dia1, mes1, anio1));
+                else if (anio1 < b1.getClientes()[i].getAnioIngreso())
+                {
+                    cout << "Anio no valido, aun no era cliente. Por favor, ingrese un anio valido" << endl;
+                }
+            } while (!validar_fecha(dia1, mes1, anio1) || anio1 < b1.getClientes()[i].getAnioIngreso());
 
             transaccion tran1(numeroCliente1, numeroTransaccion1, monto1, tipoTransaccion1, dia1, mes1, anio1, cajaAhorro1);
 
@@ -503,20 +507,20 @@ void listarClientes(banco b1)
 
 void listarTrans(banco b1)
 {
-    int numeroCliente1;
-    bool band;
+    int numeroCliente1, band = 1;
+
     do
-    {   band = true;
+    {
         cout << "Ingrese el numero de cliente para ver sus transacciones:";
         leerEntero(numeroCliente1);
         for (int i = 0; i < b1.getNumeroClientes(); i++)
         {
             if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
             {
-                band = false;
+                band = 0;
                 cout << "Detalle de cliente por numero de cliente" << endl;
 
-                for (int i = 0; i < b1.getNumeroTransacciones(); i++)
+                for (int i = 0; i < b1.getNumeroClientes(); i++)
                 {
                     if (b1.getTransacciones()[i].getNumeroCliente() == numeroCliente1)
                     {
@@ -526,17 +530,17 @@ void listarTrans(banco b1)
                 }
             }
         }
-        if (band)
+        if (band == 1)
         {
             cout << "Numero de cliente no valido." << endl;
         }
-        else if (band && b1.getNumeroClientes() == 0)
+        else if (band == 1 && b1.getNumeroClientes() == 0)
         {
             cout << "No hay clientes registrados." << endl;
             break;
         }
 
-    } while (band && b1.getNumeroClientes() != 0);
+    } while (band == 1 && b1.getNumeroClientes() != 0);
 }
 
 void mostrarInformes(banco &b1)
@@ -775,7 +779,6 @@ void cargar(banco &b1, fstream &archivoClientes, fstream &archivoTransacciones)
 
     while (!archivoClientes.eof() && archivoClientes >> nombre1 >> apellido1 >> dni1 >> tipoCliente1 >> anioIngreso1 >> estado1 >> numeroCliente1 >> numeroTarjeta1 >> cajaPesos1 >> cajaDolares1)
     {
-        cout<<"Hola"<<endl;
         tarjeta t2(numeroTarjeta1);
         cliente c1(tipoCliente1, anioIngreso1, estado1, numeroCliente1, t2, cajaPesos1, cajaDolares1, nombre1, apellido1, dni1);
         b1.agregarCliente(c1);

@@ -1,0 +1,9 @@
+rodrigo garro 32423243 oro 2019 Activo 1 156543 10500 1500
+lautaro blanco 32423243 oro 2019 Activo 2 2615 500 200
+rodrigo porro 32423243 oro 2019 Activo 3 61153 377 1200
+lucas dalto 34908746 platino 2024 activo 4 35645 400 11231
+jose lopez 46521456 oro 2018 activo 6 4635535 234 1000
+laura perez 35535335 plata 2015 activo 8 35453 31321 0
+pedro pica 48526541 oro 2018 activo 10 4653453 354 45
+maria gonzalez 23211232 plata 2018 activo 25 213123 2000 1000
+charly garcia 43920920 oro 2018 activo 232 321231 1000 1300
