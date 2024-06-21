@@ -10,8 +10,10 @@
  
 2 656 dolares 1000 extraccion 1 12 2019
  
-8 32 pesos 21321 deposito 1 2 2018
+5 32 pesos 21321 deposito 1 2 2018
  
-23 646 dolares 500 extraccion 1 12 2018
+3 646 dolares 500 extraccion 1 12 2018
  
-232 5656 dolares 800 deposito 12 5 2023
+3 5656 dolares 800 deposito 12 5 2023
+ 
+2 232 dolares 232 deposito 1 3 2024

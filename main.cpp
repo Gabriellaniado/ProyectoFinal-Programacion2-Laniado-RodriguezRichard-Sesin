@@ -1,9 +1,9 @@
 #include <iostream>
 #include "cliente.h"
-#include <fstream>
-#include <stdexcept>
-#include <limits>
-#include <unistd.h>
+#include <fstream> //libreria de archivos
+#include <stdexcept> //libreria de excepciones
+#include <limits> //libreria para borrar todo el bufer
+#include <unistd.h> //libreria para funcion esperar
 using namespace std;
 
 void esperar(float segundos)
@@ -155,21 +155,7 @@ void anadirCliente(banco &b1)
     cout << "Ingresar apellido de cliente:" << endl;
     leerPalabras(apellido1);
 
-    do
-    {
-        cout << "Ingrese numero de cliente:" << endl;
-        leerEntero(numeroCliente1);
-
-        for (int i = 0; i < b1.getNumeroClientes(); i++)
-        {
-            if (b1.getClientes()[i].getNumeroCliente() == numeroCliente1)
-            {
-                cout << "Numero de cliente ya existe. Por favor, ingrese un numero de cliente valido" << endl;
-                band = true;
-                break;
-            }
-        }
-    } while (band);
+    numeroCliente1 = b1.getNumeroClientes()+1;
 
     do
     {
@@ -804,7 +790,7 @@ void cargar(banco &b1, fstream &archivoClientes, fstream &archivoTransacciones)
 
 int main()
 {
-    srand(time(NULL));
+    srand(time(NULL)); //para funcion esperar
     banco b1(0, 0);
     fstream archivoClientes("clientes.txt", ios::in | ios::out);
     fstream archivoTransacciones("transacciones.txt", ios::in | ios::out);
