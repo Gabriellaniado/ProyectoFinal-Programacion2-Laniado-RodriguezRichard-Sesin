@@ -8,4 +8,4 @@ pedro pica 48526541 oro 2018 activo 7 4653453 354 45
 maria gonzalez 23211232 plata 2018 activo 8 213123 2000 1000
 charly garcia 43920920 oro 2018 activo 9 321231 1000 1532
 laura perez 45640303 oro 2019 activo 10 12121 1000 500
-robertp perez 4658654 oro 2024 baja 11 2321312 800 150
+roberto perez 4658654 oro 2024 baja 11 2321312 800 150

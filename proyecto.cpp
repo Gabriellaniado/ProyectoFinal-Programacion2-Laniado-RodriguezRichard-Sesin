@@ -41,124 +41,152 @@ El programa debe permitir realizar las siguientes operaciones:
 #include "cliente.h"
 using namespace std;
 
-persona::persona(){
+persona::persona()
+{
 }
 
-persona::persona(string _nombre, string _apellido, int _DNI){
+persona::persona(string _nombre, string _apellido, int _DNI)
+{
     nombre = _nombre;
     apellido = _apellido;
-    DNI = _DNI;    
-}
-
-void persona::setDNI(int _DNI){
     DNI = _DNI;
-}   
+}
 
-void persona::setNombre(string _nombre){
+void persona::setDNI(int _DNI)
+{
+    DNI = _DNI;
+}
+
+void persona::setNombre(string _nombre)
+{
     nombre = _nombre;
 }
 
-void persona::setApellido(string _apellido){
+void persona::setApellido(string _apellido)
+{
     apellido = _apellido;
 }
 
-int persona::getDNI(){
+int persona::getDNI()
+{
     return DNI;
 }
 
-string persona::getNombre(){
+string persona::getNombre()
+{
     return nombre;
 }
 
-string persona::getApellido(){
+string persona::getApellido()
+{
     return apellido;
 }
 
-void persona::mostrarPersona(){
+void persona::mostrarPersona()
+{
     cout << "Nombre: " << nombre << endl;
     cout << "Apellido: " << apellido << endl;
     cout << "DNI: " << DNI << endl;
 }
 
-transaccion::transaccion(){
+transaccion::transaccion()
+{
 }
 
-transaccion::transaccion(int _numeroCliente,int _numeroTransaccion, float _monto, string _tipoTransaccion, int _dia, int _mes, int _anio, string _cajaAhorro){
-    numeroCliente= _numeroCliente;
-    numeroTransaccion = _numeroTransaccion;
-    monto = _monto;
-    tipoTransaccion = _tipoTransaccion;
-    dia = _dia;
-    mes = _mes;
-    anio = _anio;
-    cajaAhorro=_cajaAhorro; 
-}
-
-void transaccion::setNumeroCliente(int _numeroCliente){
+transaccion::transaccion(int _numeroCliente, int _numeroTransaccion, float _monto, string _tipoTransaccion, int _dia, int _mes, int _anio, string _cajaAhorro)
+{
     numeroCliente = _numeroCliente;
-}
-
-void transaccion::setNumeroTransaccion(int _numeroTransaccion){
     numeroTransaccion = _numeroTransaccion;
-}
-
-void transaccion::setMonto(float _monto){
     monto = _monto;
-}
-
-void transaccion::setTipoTransaccion(string _tipoTransaccion){
     tipoTransaccion = _tipoTransaccion;
-}
-
-void transaccion::setDia(int _dia){
     dia = _dia;
-}
-
-void transaccion::setMes(int _mes){
     mes = _mes;
-}
-
-void transaccion::setAnio(int _anio){
     anio = _anio;
-}
-
-void transaccion::setCajaAhorro(string _cajaAhorro){
     cajaAhorro = _cajaAhorro;
 }
 
-int transaccion::getNumeroCliente(){
+void transaccion::setNumeroCliente(int _numeroCliente)
+{
+    numeroCliente = _numeroCliente;
+}
+
+void transaccion::setNumeroTransaccion(int _numeroTransaccion)
+{
+    numeroTransaccion = _numeroTransaccion;
+}
+
+void transaccion::setMonto(float _monto)
+{
+    monto = _monto;
+}
+
+void transaccion::setTipoTransaccion(string _tipoTransaccion)
+{
+    tipoTransaccion = _tipoTransaccion;
+}
+
+void transaccion::setDia(int _dia)
+{
+    dia = _dia;
+}
+
+void transaccion::setMes(int _mes)
+{
+    mes = _mes;
+}
+
+void transaccion::setAnio(int _anio)
+{
+    anio = _anio;
+}
+
+void transaccion::setCajaAhorro(string _cajaAhorro)
+{
+    cajaAhorro = _cajaAhorro;
+}
+
+int transaccion::getNumeroCliente()
+{
     return numeroCliente;
 }
 
-int transaccion::getNumeroTransaccion(){
+int transaccion::getNumeroTransaccion()
+{
     return numeroTransaccion;
 }
 
-float transaccion::getMonto(){
+float transaccion::getMonto()
+{
     return monto;
 }
 
-string transaccion::getTipoTransaccion(){
+string transaccion::getTipoTransaccion()
+{
     return tipoTransaccion;
 }
 
-int transaccion::getDia(){
+int transaccion::getDia()
+{
     return dia;
 }
 
-int transaccion::getMes(){
+int transaccion::getMes()
+{
     return mes;
 }
 
-int transaccion::getAnio(){
+int transaccion::getAnio()
+{
     return anio;
 }
 
-string transaccion::getCajaAhorro(){
+string transaccion::getCajaAhorro()
+{
     return cajaAhorro;
 }
 
-void transaccion::mostrarTransaccion(){
+void transaccion::mostrarTransaccion()
+{
     cout << endl;
     cout << "Cliente: " << numeroCliente << endl;
     cout << "Numero de transaccion: " << numeroTransaccion << endl;
@@ -168,121 +196,148 @@ void transaccion::mostrarTransaccion(){
     cout << "Fecha: " << dia << "/" << mes << "/" << anio << endl;
 }
 
-
-tarjeta::tarjeta(){
+tarjeta::tarjeta()
+{
 }
 
-tarjeta::tarjeta(int _numeroTarjeta){
-    numeroTarjeta = _numeroTarjeta;    
-}
-
-void tarjeta::setNumeroTarjeta(int _numeroTarjeta){
+tarjeta::tarjeta(int _numeroTarjeta)
+{
     numeroTarjeta = _numeroTarjeta;
 }
 
-int tarjeta::getNumeroTarjeta(){
+void tarjeta::setNumeroTarjeta(int _numeroTarjeta)
+{
+    numeroTarjeta = _numeroTarjeta;
+}
+
+int tarjeta::getNumeroTarjeta()
+{
     return numeroTarjeta;
 }
 
-void tarjeta::mostrarTarjeta(){
+void tarjeta::mostrarTarjeta()
+{
     cout << "Numero de tarjeta: " << numeroTarjeta << endl;
 }
 
-void tarjeta::setLimite(int _limite){
+void tarjeta::setLimite(int _limite)
+{
     limite = _limite;
 }
 
-int tarjeta::getLimite(){
+int tarjeta::getLimite()
+{
     return limite;
 }
 
-personal::personal(){
+personal::personal()
+{
 }
 
-personal::personal(string _nombre, string _apellido, int _DNI, string _cargo):persona(_nombre,_apellido,_DNI){
+personal::personal(string _nombre, string _apellido, int _DNI, string _cargo) : persona(_nombre, _apellido, _DNI)
+{
     cargo = _cargo;
 }
 
-void personal::setCargo(string _cargo){
+void personal::setCargo(string _cargo)
+{
     cargo = _cargo;
 }
 
-string personal::getCargo(){
+string personal::getCargo()
+{
     return cargo;
 }
 
-void personal::mostrarPersonal(){
+void personal::mostrarPersonal()
+{
     cout << "Nombre: " << getNombre() << endl;
     cout << "DNI: " << getDNI() << endl;
     cout << "Cargo: " << cargo << endl;
 }
 
-cliente::cliente(){
+cliente::cliente()
+{
 }
 
-cliente::cliente(string _tipoCliente, int _anioIngreso, string _estado, int _numeroCliente, tarjeta _t1,float _cajaPesos,float _cajaDolares,string _nombre, string _apellido, int _DNI):persona(_nombre,_apellido,_DNI){
+cliente::cliente(string _tipoCliente, int _anioIngreso, string _estado, int _numeroCliente, tarjeta _t1, float _cajaPesos, float _cajaDolares, string _nombre, string _apellido, int _DNI) : persona(_nombre, _apellido, _DNI)
+{
     tipoCliente = _tipoCliente;
     anioIngreso = _anioIngreso;
     estado = _estado;
-    numeroCliente=_numeroCliente;
+    numeroCliente = _numeroCliente;
     t1 = _t1;
     cajaPesos = _cajaPesos;
     cajaDolares = _cajaDolares;
 }
 
-void cliente::setTipoCliente(string _tipoCliente){
+void cliente::setTipoCliente(string _tipoCliente)
+{
     tipoCliente = _tipoCliente;
 }
 
-void cliente::setAnioIngreso(int _anioIngreso){
+void cliente::setAnioIngreso(int _anioIngreso)
+{
     anioIngreso = _anioIngreso;
 }
 
-void cliente::setEstado(string _estado){
+void cliente::setEstado(string _estado)
+{
     estado = _estado;
 }
 
-void cliente::setNumeroCliente(int _numeroCliente){
+void cliente::setNumeroCliente(int _numeroCliente)
+{
     numeroCliente = _numeroCliente;
 }
 
-void cliente::setCajaPesos(float _cajaPesos){
+void cliente::setCajaPesos(float _cajaPesos)
+{
     cajaPesos = _cajaPesos;
 }
 
-void cliente::setCajaDolares(float _cajaDolares){
+void cliente::setCajaDolares(float _cajaDolares)
+{
     cajaDolares = _cajaDolares;
 }
 
-float cliente::getCajaPesos(){
+float cliente::getCajaPesos()
+{
     return cajaPesos;
 }
 
-float cliente::getCajaDolares(){
+float cliente::getCajaDolares()
+{
     return cajaDolares;
 }
 
-string cliente::getTipoCliente(){
+string cliente::getTipoCliente()
+{
     return tipoCliente;
 }
 
-int cliente::getAnioIngreso(){
+int cliente::getAnioIngreso()
+{
     return anioIngreso;
 }
 
-string cliente::getEstado(){
+string cliente::getEstado()
+{
     return estado;
 }
 
-int cliente::getNumeroCliente(){
+int cliente::getNumeroCliente()
+{
     return numeroCliente;
 }
 
-tarjeta cliente::getTarjeta(){
+tarjeta cliente::getTarjeta()
+{
     return t1;
 }
 
-void cliente::mostrarCliente(){
+void cliente::mostrarCliente()
+{
     cout << endl;
     mostrarPersona();
     cout << "Numero de cliente: " << numeroCliente << endl;
@@ -294,87 +349,108 @@ void cliente::mostrarCliente(){
     t1.mostrarTarjeta();
 }
 
-banco::banco(){
+banco::banco()
+{
 }
 
-banco::banco(int _numeroClientes, int _numeroTransacciones){
+banco::banco(int _numeroClientes, int _numeroTransacciones)
+{
     numeroClientes = _numeroClientes;
     numeroTransacciones = _numeroTransacciones;
 }
 
-void banco::agregarCliente(cliente _cliente){
+void banco::agregarCliente(cliente _cliente)
+{
     clientes[numeroClientes] = _cliente;
     numeroClientes++;
 }
 
-void banco::agregarTransaccion(transaccion _transaccion){
+void banco::agregarTransaccion(transaccion _transaccion)
+{
     transacciones[numeroTransacciones] = _transaccion;
     numeroTransacciones++;
 }
 
-void banco::setNumeroClientes(int _numeroClientes){
+void banco::setNumeroClientes(int _numeroClientes)
+{
     numeroClientes = _numeroClientes;
 }
 
-int banco::getNumeroClientes(){
+int banco::getNumeroClientes()
+{
     return numeroClientes;
-} 
+}
 
-void banco::setNumeroTransacciones(int _numeroTransacciones){
+void banco::setNumeroTransacciones(int _numeroTransacciones)
+{
     numeroTransacciones = _numeroTransacciones;
 }
 
-int banco::getNumeroTransacciones(){
+int banco::getNumeroTransacciones()
+{
     return numeroTransacciones;
 }
 
-void banco::setClientes(cliente _cliente[100]){
-    for(int i = 0; i < numeroClientes; i++){
+void banco::setClientes(cliente _cliente[100])
+{
+    for (int i = 0; i < numeroClientes; i++)
+    {
         clientes[i] = _cliente[i];
     }
 }
 
-cliente* banco::getClientes(){
+cliente *banco::getClientes()
+{
     return clientes;
 }
 
-void banco::setTransacciones(transaccion _transaccion[100]){
-    for(int i = 0; i < numeroTransacciones; i++){
+void banco::setTransacciones(transaccion _transaccion[100])
+{
+    for (int i = 0; i < numeroTransacciones; i++)
+    {
         transacciones[i] = _transaccion[100];
-
     }
 }
 
-transaccion* banco::getTransacciones(){
+transaccion *banco::getTransacciones()
+{
     return transacciones;
 }
 
-void banco::darAlta(int dni){
-    for(int i = 0; i < numeroClientes; i++){
-        if(clientes[i].getDNI() == dni){
+void banco::darAlta(int dni)
+{
+    for (int i = 0; i < numeroClientes; i++)
+    {
+        if (clientes[i].getDNI() == dni)
+        {
             clientes[i].setEstado("Activo");
         }
-    } //poner cuando ya esta en alta excpecion
+    } // poner cuando ya esta en alta excpecion
 }
 
-void banco::darBaja(int dni){
-    for(int i = 0; i < numeroClientes; i++){
-        if(clientes[i].getDNI() == dni){
+void banco::darBaja(int dni)
+{
+    for (int i = 0; i < numeroClientes; i++)
+    {
+        if (clientes[i].getDNI() == dni)
+        {
             clientes[i].setEstado("Baja");
         }
-    } //poner cuando ya esta de baja excpecion
+    } // poner cuando ya esta de baja excpecion
 }
 
-void banco::listarClientes(){
-    for(int i = 0; i < numeroClientes; i++){
+void banco::listarClientes()
+{
+    for (int i = 0; i < numeroClientes; i++)
+    {
         clientes[i].mostrarCliente();
     }
 }
 
-void banco::listarTransacciones(){
-    for(int i = 0; i < numeroTransacciones; i++){
+void banco::listarTransacciones()
+{
+    for (int i = 0; i < numeroTransacciones; i++)
+    {
         transacciones[i].mostrarTransaccion();
     }
 }
-
-
